@@ -1,0 +1,213 @@
+/* --- Glass card --- */
+.card {
+  position: relative;
+  width: min(92vw, 460px);
+  padding: 32px 24px;
+  border-radius: 28px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(124, 58, 237, 0.15);
+  perspective: 900px;
+}
+
+.card.is-tilting {
+  transition: transform 120ms ease-out;
+  transform-style: preserve-3d;
+}
+
+/* --- Persistent "back to start" button --- */
+.home-btn {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top));
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(7, 3, 15, 0.55);
+  border: 1px solid rgba(192, 132, 252, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: opacity 300ms ease, transform 200ms ease;
+  touch-action: manipulation;
+}
+.home-btn:hover { color: var(--purple-300); transform: translateY(-1px); }
+.home-btn.is-hidden { opacity: 0; pointer-events: none; }
+
+/* --- Buttons --- */
+.btn {
+  min-height: 48px;
+  min-width: 48px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  touch-action: manipulation;
+  transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+}
+
+.btn:active { transform: scale(0.96); }
+
+.btn-primary {
+  color: white;
+  background: linear-gradient(135deg, var(--purple-500), var(--red-500));
+  box-shadow: 0 10px 30px rgba(225, 29, 72, 0.35), 0 0 0 1px rgba(255,255,255,0.08) inset;
+  transform: scale(var(--grow, 1));
+}
+
+.btn-primary:hover {
+  transform: scale(var(--grow, 1)) translateY(-2px) rotateX(4deg);
+  box-shadow: 0 16px 40px rgba(225, 29, 72, 0.45), 0 0 0 1px rgba(255,255,255,0.12) inset;
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(184, 169, 217, 0.35);
+}
+
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--purple-300);
+}
+
+.btn-ghost {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+}
+.btn-ghost:hover { color: var(--purple-300); }
+.btn-ghost[disabled] { color: var(--text-muted); }
+
+.btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Escaping "No" button */
+.btn-escaping {
+  position: relative;
+  transition: transform 220ms cubic-bezier(.34,1.56,.64,1);
+}
+
+/* --- Titles & text --- */
+.title-romantic {
+  font-family: var(--font-title);
+  font-size: clamp(2.6rem, 10vw, 5rem);
+  line-height: 1.1;
+  margin: 0;
+  background: linear-gradient(135deg, var(--purple-300), var(--rose) 60%, var(--red-400));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.35));
+  animation: title-glow 4s ease-in-out infinite;
+}
+
+@keyframes title-glow {
+  0%, 100% { filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.3)); }
+  50% { filter: drop-shadow(0 0 26px rgba(255, 45, 85, 0.4)); }
+}
+
+.text-quote {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.text-muted { color: var(--text-muted); }
+
+/* --- Toast / inline message --- */
+.toast {
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--rose);
+  min-height: 1.4em;
+  font-size: 1rem;
+}
+
+/* --- Numeric date inputs (lock scene) --- */
+.date-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.date-input {
+  width: 3.2rem;
+  height: 3.2rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(184, 169, 217, 0.3);
+  border-radius: 14px;
+  outline: none;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.date-input:nth-child(3) { width: 4.6rem; }
+
+.date-input:focus {
+  border-color: var(--purple-300);
+  box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.2);
+}
+
+.date-input.is-wrong {
+  border-color: var(--red-400);
+  animation: shake 500ms ease;
+}
+
+.date-input.is-correct {
+  border-color: var(--gold);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.5);
+}
+
+.date-sep {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(4px); }
+  30%, 50%, 70% { transform: translateX(-8px); }
+  40%, 60% { transform: translateX(8px); }
+}
+
+.card.is-shaking { animation: shake 500ms ease; }
+
+/* --- Progress bar (loading scene) --- */
+.progress-track {
+  width: min(70vw, 280px);
+  height: 4px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.1);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--purple-400), var(--red-400), var(--gold));
+  transition: width 120ms linear;
+}

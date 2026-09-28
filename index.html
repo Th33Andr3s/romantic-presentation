@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Para mi gran amor 💜</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Abre esto cuando tengas un momento tranquilo…" />
+
+  <meta property="og:title" content="Para mi gran amor 💜" />
+  <meta property="og:description" content="Abre esto cuando tengas un momento tranquilo…" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://th33andr3s.github.io/romantic-presentation/assets/img/og-preview.webp" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@400;600&display=swap" />
+
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/scenes.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <canvas id="starfield-canvas" aria-hidden="true"></canvas>
+
+    <button type="button" class="home-btn is-hidden" id="home-btn" aria-label="Volver al inicio">
+      <span aria-hidden="true">⟵</span> Inicio
+    </button>
+
+    <!-- INTRO -->
+    <section class="scene" id="scene-intro" data-scene="intro">
+      <div class="card u-center">
+        <h1 class="title-romantic" data-intro-title></h1>
+        <div class="bouquet-wrap" data-bouquet></div>
+        <p class="text-quote" data-intro-question></p>
+        <div class="intro-actions">
+          <button class="btn btn-primary" data-intro-yes></button>
+          <button class="btn btn-secondary btn-escaping" data-intro-no></button>
+        </div>
+        <p class="toast" data-intro-tease></p>
+      </div>
+    </section>
+
+    <!-- SAD -->
+    <section class="scene" id="scene-sad" data-scene="sad">
+      <div class="sad-scene-tint" aria-hidden="true"></div>
+      <div class="u-center">
+        <svg class="sad-cloud" viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <ellipse cx="80" cy="50" rx="55" ry="26" fill="#6b7280"/>
+          <ellipse cx="45" cy="40" rx="30" ry="22" fill="#7c8798"/>
+          <ellipse cx="115" cy="42" rx="32" ry="24" fill="#7c8798"/>
+          <rect class="raindrop" x="35" y="70" width="3" height="12" style="animation-delay:0s"/>
+          <rect class="raindrop" x="60" y="72" width="3" height="12" style="animation-delay:.3s"/>
+          <rect class="raindrop" x="85" y="70" width="3" height="12" style="animation-delay:.6s"/>
+          <rect class="raindrop" x="110" y="73" width="3" height="12" style="animation-delay:.2s"/>
+          <rect class="raindrop" x="125" y="70" width="3" height="12" style="animation-delay:.5s"/>
+        </svg>
+        <svg class="broken-heart-wrap" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="brokenGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#5b21b6"/>
+            </linearGradient>
+          </defs>
+          <path class="broken-heart-left" d="M50,80 C20,55 5,35 5,20 C5,5 20,-2 35,8 C42,13 47,22 50,30 L50,80 Z" fill="url(#brokenGrad)"/>
+          <path class="broken-heart-right" d="M50,80 C80,55 95,35 95,20 C95,5 80,-2 65,8 C58,13 53,22 50,30 L50,80 Z" fill="url(#brokenGrad)"/>
+        </svg>
+        <p data-sad-line1></p>
+        <p class="sad-line2" data-sad-line2></p>
+        <button class="btn btn-primary" data-sad-back style="margin-top:16px"></button>
+      </div>
+    </section>
+
+    <!-- LOADING -->
+    <section class="scene scene-loading" id="scene-loading" data-scene="loading">
+      <canvas class="fx-canvas-full" id="loading-canvas"></canvas>
+      <div class="loading-overlay">
+        <p class="loading-text" data-loading-text></p>
+        <div class="progress-track"><div class="progress-fill" data-loading-fill></div></div>
+        <span class="loading-percent" data-loading-percent></span>
+      </div>
+    </section>
+
+    <!-- GALAXY -->
+    <section class="scene scene-galaxy" id="scene-galaxy" data-scene="galaxy">
+      <canvas class="fx-canvas-full" id="galaxy-canvas"></canvas>
+      <div class="galaxy-phrases" data-galaxy-phrases aria-hidden="true"></div>
+      <div class="enter-btn-wrap" data-enter-wrap>
+        <div class="enter-ring" aria-hidden="true"></div>
+        <button class="btn btn-primary" data-enter-btn></button>
+      </div>
+    </section>
+
+    <!-- LOCK -->
+    <section class="scene" id="scene-lock" data-scene="lock">
+      <div class="card u-center">
+        <h2 class="text-quote" data-lock-title></h2>
+        <div class="date-input-group">
+          <input class="date-input" data-lock-day inputmode="numeric" pattern="[0-9]*" maxlength="2" aria-label="Día" autocomplete="off" />
+          <span class="date-sep">/</span>
+          <input class="date-input" data-lock-month inputmode="numeric" pattern="[0-9]*" maxlength="2" aria-label="Mes" autocomplete="off" />
+          <span class="date-sep">/</span>
+          <input class="date-input" data-lock-year inputmode="numeric" pattern="[0-9]*" maxlength="4" aria-label="Año" autocomplete="off" />
+        </div>
+        <button class="btn btn-primary" data-lock-submit></button>
+        <p class="toast" data-lock-message></p>
+        <p class="lock-hint u-hidden" data-lock-hint></p>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="scene scene-book" id="scene-book" data-scene="book">
+      <div class="book-wrap">
+        <div class="book-canvas" data-book-container></div>
+      </div>
+      <div class="book-controls">
+        <button class="btn btn-ghost" data-book-prev></button>
+        <span class="book-indicator" data-book-indicator></span>
+        <button class="btn btn-ghost" data-book-next></button>
+      </div>
+      <p class="book-locked-msg u-hidden" data-book-locked-msg></p>
+    </section>
+
+    <!-- VOLCANO -->
+    <section class="scene scene-volcano" id="scene-volcano" data-scene="volcano">
+      <canvas class="fx-canvas-full" id="volcano-canvas"></canvas>
+      <div class="u-center">
+        <p class="volcano-warning" data-volcano-warning></p>
+        <div class="volcano-final" data-volcano-final></div>
+        <button class="btn btn-primary volcano-next-btn" data-volcano-next></button>
+      </div>
+    </section>
+
+    <!-- LETTER -->
+    <section class="scene" id="scene-letter" data-scene="letter">
+      <div class="letter-card">
+        <p class="letter-greeting" data-letter-greeting></p>
+        <div data-letter-paragraphs></div>
+        <p class="letter-signature" data-letter-signature></p>
+        <p class="letter-date" data-letter-date></p>
+        <button class="btn btn-primary letter-restart-btn" data-letter-restart></button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -244,7 +244,7 @@ estrellas de fondo más densas.
 
 ### Fase 5 — Clave de cumpleaños (`lock.js`)
 Tarjeta de vidrio con:
-- Título: **"Si tanto me conoces, digita mi fecha de cumpleaños"**.
+- Título: **"Si tanto me conoces, digita mi fecha de nacimiento"**.
 - Tres cajas: `DD` (2 dígitos), `MM` (2 dígitos), `AAAA` (4 dígitos), cada una
   `<input inputmode="numeric" pattern="[0-9]*">`. Autoavance al completar cada caja y
   retroceso con Backspace en caja vacía. Separadores "/" entre cajas.
@@ -425,7 +425,7 @@ export const content = {
   galaxyEnter: 'Ingresar',
 
   lock: {
-    title: 'Si tanto me conoces, digita mi fecha de cumpleaños',
+    title: 'Si tanto me conoces, digita mi fecha de nacimiento',
     submit: 'Comprobar',
     answer: { day: 5, month: 2, year: 2002 },
     wrong: [
@@ -455,7 +455,7 @@ export const content = {
     {
       photo: 'assets/img/photo-01.webp', tiny: 'assets/img/photo-01-tiny.webp',
       date: '13 de junio',
-      quote: 'Si te quiero es porque sos mi amor, mi cómplice y todo; y en la calle codo a codo somos mucho más que dos.',
+      quote: 'Si te quiero es porque eres mi amor, mi cómplice y todo; y en la calle codo a codo somos mucho más que dos.',
       author: 'Mario Benedetti',
       line: 'Tú, Kenji y yo caminando juntos. Ese día entendí que hogar no es un lugar: es hacia donde vamos los tres.',
     },
@@ -506,7 +506,7 @@ export const content = {
       date: '7 de marzo',
       quote: 'Los amantes no se encuentran en algún lugar. Están el uno en el otro desde siempre.',
       author: 'Rumi',
-      line: 'De nuestras primeras fotos juntos. Aquí ya lo sabía, aunque todavía no me atrevía a decirlo.',
+      line: 'De nuestras primeras fotos juntos. Aquí ya lo sabía, me hacias tan feliz.',
     },
     {
       photo: 'assets/img/photo-10.webp', tiny: 'assets/img/photo-10-tiny.webp',
@@ -520,6 +520,7 @@ export const content = {
   puzzle: {
     image: 'assets/img/puzzle.webp',
     title: 'Este recuerdo está en piezas. Ármalo conmigo.',
+    instructions: 'Toca una ficha y luego toca otra para intercambiarlas.',
     help: 'Pídeme ayuda 💜',
     helpAfterMs: 90000,
     moves: 'Movimientos',
@@ -531,7 +532,7 @@ export const content = {
 
   volcano: {
     warning: 'Algo está por pasar…',
-    finalText: 'TE AMO',
+    finalText: 'Te amo con mi alma',
     next: 'Una última cosa…',
   },
 
@@ -539,7 +540,7 @@ export const content = {
     greeting: 'Valery,',
     paragraphs: [
       'Gracias por cada foto de este libro y por todas las que todavía no hemos tomado.',
-      'Quiero despertar contigo, pelear por la cobija, aprender tus manías y que tú aprendas las mías. Quiero que "mi casa" pase a ser "nuestra casa", y que Kenji crezca sabiendo que en ella tiene a alguien más que lo quiere y lo cuida.',
+      'Quiero despertar contigo, pelear por la cobija, aprender tus manías y que tú aprendas las mías. Quiero que "mi casa" pase a ser "nuestra casa", y que Kenji crezca sabiendo que tiene a alguien más que lo quiere y lo cuida.',
       'No te prometo que todo será perfecto. Te prometo que en cada día imperfecto vas a tenerme a tu lado, eligiéndote otra vez.',
       'Empecemos esta etapa juntos.',
     ],

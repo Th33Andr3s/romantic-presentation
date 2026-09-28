@@ -1,0 +1,653 @@
+/* ============ INTRO ============ */
+#scene-intro .card {
+  transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+
+.card.card-auto-tilt {
+  animation: card-auto-tilt 6s ease-in-out infinite;
+}
+
+@keyframes card-auto-tilt {
+  0%, 100% { transform: rotateY(-4deg); }
+  50% { transform: rotateY(4deg); }
+}
+
+.bouquet-wrap {
+  width: 55%;
+  max-width: 260px;
+  margin: 4px auto 8px;
+}
+
+.bouquet-svg { width: 100%; height: auto; overflow: visible; }
+
+.bouquet-sway {
+  transform-origin: 50% 97%;
+  animation: bouquet-sway 5s ease-in-out infinite;
+}
+
+@keyframes bouquet-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.bouquet-glow {
+  animation: glow-breathe 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.85; }
+}
+
+.petal-bloom {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: petal-bloom 900ms cubic-bezier(.34,1.56,.64,1) both;
+}
+
+@keyframes petal-bloom {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+.leaf-bloom {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: petal-bloom 700ms ease-out both;
+}
+
+.intro-actions {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  min-height: 130px;
+  /* Keep full width even once the "No" button leaves the flow (becomes
+     absolutely positioned to escape) - otherwise this flex item would
+     shrink to fit just the "Sí" button, leaving nowhere to relocate to. */
+  align-self: stretch;
+  width: 100%;
+}
+
+.btn-escaping {
+  position: absolute;
+}
+
+.btn-escaping:not(.is-fixed-pos) {
+  position: static;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bouquet-sway, .bouquet-glow, .petal-bloom, .leaf-bloom { animation: none; }
+}
+
+/* ============ SAD ============ */
+#scene-sad {
+  transition: background 800ms ease;
+}
+
+.sad-scene-tint {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, rgba(59,130,246,0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.sad-cloud {
+  width: 140px;
+  margin: 0 auto 8px;
+  position: relative;
+}
+
+.raindrop {
+  position: absolute;
+  width: 3px;
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(var(--blue-300), transparent);
+  animation: rain-fall 1.4s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes rain-fall {
+  0% { transform: translateY(0); opacity: 0.8; }
+  100% { transform: translateY(30px); opacity: 0; }
+}
+
+.broken-heart-wrap { width: 110px; margin: 12px auto; }
+.broken-heart-left { animation: heart-part-left 1.2s ease-out both; transform-origin: 50% 20%; }
+.broken-heart-right { animation: heart-part-right 1.2s ease-out both; transform-origin: 50% 20%; }
+
+@keyframes heart-part-left {
+  0% { transform: translate(0,0) rotate(0deg); }
+  100% { transform: translate(-6px, 4px) rotate(-8deg); }
+}
+@keyframes heart-part-right {
+  0% { transform: translate(0,0) rotate(0deg); }
+  100% { transform: translate(6px, 4px) rotate(8deg); }
+}
+
+.sad-line2 {
+  opacity: 0;
+  animation: fade-up 600ms ease 1.4s forwards;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============ LOADING ============ */
+.scene-loading, .scene-galaxy, .scene-volcano {
+  padding: 0 !important;
+}
+
+.fx-canvas-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.loading-overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.loading-text {
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--text);
+  min-height: 1.6em;
+  text-align: center;
+}
+
+.loading-percent {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ============ GALAXY ============ */
+.galaxy-phrase {
+  position: absolute;
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: clamp(1rem, 3.4vw, 1.4rem);
+  color: var(--text);
+  text-shadow: 0 0 14px rgba(192, 132, 252, 0.55);
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  animation: phrase-life 6s ease forwards;
+  max-width: 60vw;
+  text-align: center;
+}
+
+@keyframes phrase-life {
+  0% { opacity: 0; transform: translateY(6px); }
+  12% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.enter-btn-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 4;
+  transition: transform 500ms cubic-bezier(.34,1.56,.64,1);
+}
+
+.enter-btn-wrap.is-visible { transform: translate(-50%, -50%) scale(1); }
+
+.enter-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  border-top-color: var(--gold);
+  border-right-color: var(--rose);
+  animation: ring-spin 3s linear infinite;
+}
+
+@keyframes ring-spin { to { transform: rotate(360deg); } }
+
+/* ============ LOCK ============ */
+.lock-hint {
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--gold);
+  min-height: 1.4em;
+  margin-top: 8px;
+}
+
+/* ============ BOOK ============ */
+.scene-book {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.book-wrap {
+  width: min(90vw, 480px);
+  height: min(70dvh, 640px);
+  position: relative;
+  z-index: 2;
+}
+
+.book-canvas {
+  /* StPageFlip sets its own inline width:100%/max-width on this element
+     (max-width defaults to 2x the configured maxWidth, for two-page
+     spreads). Keeping it in a separately-sized `.book-wrap` parent means
+     that 100% always resolves to OUR constrained size, so the book stays
+     single-page and centered instead of growing to a wide landscape spread
+     whenever there is room for one. */
+  width: 100%;
+  height: 100%;
+}
+
+.book-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 4vw, 18px);
+  z-index: 2;
+  background: rgba(7, 3, 15, 0.55);
+  border: 1px solid rgba(192, 132, 252, 0.22);
+  padding: 8px clamp(10px, 4vw, 20px);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  white-space: nowrap;
+}
+
+.book-indicator {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 60px;
+  text-align: center;
+}
+
+.book-locked-msg {
+  font-family: var(--font-quote);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--gold);
+  text-align: center;
+}
+
+/* StPageFlip page content */
+.page {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, var(--bg-800), var(--bg-700));
+  /* !important: StPageFlip sets an inline `display:block` on this exact
+     element for its own positioning, which otherwise silently defeats the
+     flex-centering below (a plain inline style always beats an external
+     stylesheet, importance aside) and left content such as the puzzle board
+     pinned to the left edge instead of centered. */
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 14px;
+  position: relative;
+  overflow: hidden;
+  /* Pages only turn via the Prev/Next buttons now (useMouseEvents:false in
+     book.js), so any leftover mouse drag over text would just select it. */
+  user-select: none;
+  -webkit-user-select: none;
+  /* The current/next page is dimmed then restored by book.js around each
+     turn, so it fades gradually instead of cutting away instantly. */
+  transition: opacity 350ms ease;
+}
+
+.page-hard {
+  background: radial-gradient(ellipse at 50% 20%, rgba(124,58,237,0.35), transparent 60%), linear-gradient(160deg, var(--bg-900), var(--bg-700));
+  justify-content: center;
+  text-align: center;
+}
+
+.cover-title {
+  font-family: var(--font-title);
+  font-size: clamp(2rem, 9vw, 3.2rem);
+  color: var(--text);
+  margin: 0;
+}
+
+.cover-subtitle {
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--rose);
+  margin-top: 6px;
+}
+
+.cover-hint {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.polaroid {
+  background: #fbf7ff;
+  padding: 12px 12px 30px;
+  border-radius: 4px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+  transform: rotate(var(--tilt, 0deg));
+  max-width: 82%;
+  width: 260px;
+  margin: 0 auto;
+}
+
+.photo-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #eae2f5;
+  border-radius: 2px;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  opacity: 1;
+}
+
+.reveal-sheen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.reveal-sheen::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(75deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-120%) rotate(8deg);
+  transition: transform 1.6s ease-out;
+}
+
+.reveal-sheen.is-active::before {
+  transform: translateX(360%) rotate(8deg);
+}
+
+.reveal-stardust {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.page-text {
+  margin-top: 14px;
+  max-width: 92%;
+  max-height: 24dvh;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.page-text.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.page-date {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.page-quote {
+  font-family: var(--font-quote);
+  font-style: italic;
+  text-align: center;
+  margin: 6px 0 2px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.page-author {
+  font-family: var(--font-quote);
+  font-size: 0.82rem;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+.page-divider {
+  height: 1px;
+  margin: 8px auto;
+  width: 56px;
+  background: linear-gradient(90deg, var(--purple-400), var(--red-400));
+}
+
+.page-line {
+  font-family: var(--font-quote);
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.page-number {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.page-final-btn { margin-top: 20px; }
+
+/* ============ PUZZLE ============ */
+.puzzle-page {
+  gap: 10px;
+}
+
+.puzzle-title {
+  font-family: var(--font-quote);
+  font-style: italic;
+  text-align: center;
+  font-size: 0.95rem;
+  max-width: 88%;
+}
+
+.puzzle-instructions {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 80%;
+  margin: -4px 0 2px;
+}
+
+.puzzle-board {
+  --puzzle-gap: 3px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--puzzle-gap);
+  width: min(74vw, 300px);
+  aspect-ratio: 4 / 3;
+}
+
+.puzzle-tile {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: transform 250ms ease, box-shadow 200ms ease;
+  touch-action: manipulation;
+}
+
+.puzzle-tile.is-selected {
+  box-shadow: 0 0 0 3px var(--gold);
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+.puzzle-tile.is-correct-flash {
+  animation: tile-correct 500ms ease;
+}
+
+@keyframes tile-correct {
+  0% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+  50% { box-shadow: 0 0 20px 5px rgba(74,222,128,0.75); }
+  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
+
+.puzzle-board.is-solved {
+  --puzzle-gap: 0px;
+}
+
+.puzzle-board.is-solved .puzzle-tile {
+  border-radius: 0;
+  border-color: transparent;
+}
+
+.puzzle-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.puzzle-help-btn { margin-top: 4px; }
+
+.puzzle-solved-text {
+  font-family: var(--font-quote);
+  font-style: italic;
+  text-align: center;
+  color: var(--text);
+  max-width: 88%;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.puzzle-solved-text.is-visible { opacity: 1; }
+
+/* ============ VOLCANO ============ */
+.volcano-warning {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-quote);
+  font-style: italic;
+  color: var(--text-muted);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.volcano-final {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 9vw, 3.8rem);
+  line-height: 1.2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.05em 0.3em;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.te-amo-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.volcano-final .letter-pop {
+  display: inline-block;
+  transform: scale(0);
+  animation: letter-pop 500ms cubic-bezier(.34,1.56,.64,1) forwards;
+  /* Solid, bright color instead of a gradient clipped to the text: a
+     gradient's darker stop was blending into the dark sky, so "barely
+     visible" was a real contrast problem, not just a subjective read. */
+  color: #fff9f0;
+  text-shadow:
+    0 0 10px rgba(255, 45, 85, 0.95),
+    0 0 26px rgba(255, 45, 85, 0.75),
+    0 0 46px rgba(168, 85, 247, 0.65),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes letter-pop {
+  to { transform: scale(1); }
+}
+
+.volcano-next-btn {
+  position: relative;
+  z-index: 2;
+  margin-top: 18px;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+.volcano-next-btn.is-visible { opacity: 1; }
+
+/* ============ LETTER ============ */
+.letter-card {
+  background: #f8f1e7;
+  color: #2a1a3a;
+  border-radius: 12px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  padding: 36px 26px;
+  font-family: var(--font-quote);
+  max-width: min(90vw, 480px);
+  position: relative;
+  z-index: 2;
+}
+
+.letter-greeting {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  margin: 0 0 12px;
+}
+
+.letter-paragraph {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.letter-paragraph.is-visible { opacity: 1; transform: none; }
+
+.letter-signature {
+  font-family: var(--font-title);
+  font-size: 2.1rem;
+  text-align: right;
+  margin-top: 6px;
+}
+
+.letter-date {
+  font-size: 0.78rem;
+  text-align: right;
+  opacity: 0.7;
+}
+
+.letter-restart-btn {
+  margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
