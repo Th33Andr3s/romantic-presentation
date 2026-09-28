@@ -1,0 +1,6 @@
+# Fotos originales (44 MB). Las versiones optimizadas viven en assets/img/
+Imagenes/
+
+node_modules/
+.DS_Store
+Thumbs.db
